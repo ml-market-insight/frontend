@@ -22,6 +22,12 @@ export default {
           900: 'rgb(var(--tw-color-primary-900) / <alpha-value>)',
           950: 'rgb(var(--tw-color-primary-950) / <alpha-value>)'
         },
+        accent: '#FF5C00',
+        accentdark: '#993700',
+        obsidian: '#141415',
+        lightgrey: '#2E2F33',
+        gray: '#878684',
+        grey: '#555555',
         dark: '#222222'
       },
       keyframes: {
