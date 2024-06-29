@@ -126,7 +126,7 @@ const SearchBar = () => {
           onChange={(e) => setSearch(e.target.value)}
           type="text"
           placeholder="Saisissez les actions dans lesquels vous souhaitez investir"
-          className="w-full rounded-xl border border-lightgrey bg-obsidian py-3 pl-10 pr-4 text-white placeholder-gray/80 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-60"
+          className="w-full text-ellipsis rounded-xl border border-lightgrey bg-obsidian py-3 pl-10 pr-4 text-white placeholder-gray/80 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-60"
         />
         <MagnifyingGlassIcon className="absolute left-4 top-1/2 size-4 -translate-y-1/2 transform text-gray/80" />
         <Dropdown items={displayedStocks} onClick={handleSelect} />

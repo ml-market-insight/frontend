@@ -29,9 +29,9 @@ const Dropdown: React.FC<DropdownProps> = ({ items, onClick }) => {
               className="rounded-full"
             />
           </span>
-          <span className="flex flex-row items-center divide-x divide-black/20 text-left">
-            <h4 className="w-24 pl-3 text-black/80">{item.ticker}</h4>
-            <h5 className="pl-4 text-black">{item.name}</h5>
+          <span className="flex flex-col items-start pl-3 text-left md:flex-row md:items-center md:divide-x md:divide-black/20">
+            <h4 className="text-black/80 md:w-24">{item.ticker}</h4>
+            <h5 className="line-clamp-1 text-ellipsis text-black md:pl-4">{item.name}</h5>
           </span>
           <span className="ml-auto flex flex-row items-center gap-1 opacity-45">
             <ShieldCheckIcon className="size-4" />
