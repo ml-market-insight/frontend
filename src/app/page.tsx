@@ -1,5 +1,6 @@
 //import Image from 'next/image';
 
+import Panel from '@/feature/panel';
 import SearchBar from '@/feature/searchbar';
 
 //import hero from '/public/images/hero.jpg';
@@ -21,6 +22,9 @@ export default function HomePage() {
         </div>
         {/* <Image src={hero} alt="Hero" className='absolute top-0 left-0 -z-10'/> */}
         <SearchBar />
+      </section>
+      <section className="flex w-full -translate-y-1/2 justify-center">
+        <Panel />
       </section>
       <section className="min-h-screen"></section>
     </main>
