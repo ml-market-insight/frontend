@@ -1,5 +1,6 @@
 //import Image from 'next/image';
 
+import CTABanner from '@/feature/cta';
 import Footer from '@/feature/footer';
 import Panel from '@/feature/panel';
 import SearchBar from '@/feature/searchbar';
@@ -28,12 +29,13 @@ export default function HomePage() {
       <section className="flex w-full -translate-y-1/3 justify-center md:-translate-y-1/2">
         <Panel />
       </section>
-      <section className="flex min-h-screen -translate-y-64 flex-col gap-16 px-12 md:-translate-y-32">
+      <section className="flex -translate-y-64 flex-col gap-16 px-12 md:-translate-y-32">
         <h2 className="bg-gradient-to-r from-accent to-accentdark bg-clip-text text-transparent">
           Comment ça marche ?
         </h2>
         <Steps />
       </section>
+      <CTABanner />
       <Footer />
     </main>
   );
