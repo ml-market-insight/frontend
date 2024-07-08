@@ -1,5 +1,6 @@
 //import Image from 'next/image';
 
+import Footer from '@/feature/footer';
 import Panel from '@/feature/panel';
 import SearchBar from '@/feature/searchbar';
 import Steps from '@/feature/steps';
@@ -33,6 +34,7 @@ export default function HomePage() {
         </h2>
         <Steps />
       </section>
+      <Footer />
     </main>
   );
 }
