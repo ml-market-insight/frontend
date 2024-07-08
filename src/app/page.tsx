@@ -2,6 +2,7 @@
 
 import Panel from '@/feature/panel';
 import SearchBar from '@/feature/searchbar';
+import Steps from '@/feature/steps';
 
 //import hero from '/public/images/hero.jpg';
 
@@ -26,7 +27,12 @@ export default function HomePage() {
       <section className="flex w-full -translate-y-1/2 justify-center">
         <Panel />
       </section>
-      <section className="min-h-screen"></section>
+      <section className="flex min-h-screen flex-col gap-16 px-12">
+        <h2 className="bg-gradient-to-r from-accent to-accentdark bg-clip-text text-transparent">
+          Comment ça marche ?
+        </h2>
+        <Steps />
+      </section>
     </main>
   );
 }
