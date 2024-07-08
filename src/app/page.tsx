@@ -25,10 +25,10 @@ export default function HomePage() {
         {/* <Image src={hero} alt="Hero" className='absolute top-0 left-0 -z-10'/> */}
         <SearchBar />
       </section>
-      <section className="flex w-full -translate-y-1/2 justify-center">
+      <section className="flex w-full -translate-y-1/3 justify-center md:-translate-y-1/2">
         <Panel />
       </section>
-      <section className="flex min-h-screen flex-col gap-16 px-12">
+      <section className="flex min-h-screen -translate-y-64 flex-col gap-16 px-12 md:-translate-y-32">
         <h2 className="bg-gradient-to-r from-accent to-accentdark bg-clip-text text-transparent">
           Comment ça marche ?
         </h2>
