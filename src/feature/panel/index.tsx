@@ -11,9 +11,11 @@ import Prediction from './prediction';
 
 interface PanelProps {
   selectedStocks: Stock[];
+  reset: boolean;
+  setReset: (reset: boolean) => void;
 }
 
-const Panel: React.FC<PanelProps> = ({ selectedStocks }) => {
+const Panel: React.FC<PanelProps> = ({ selectedStocks, reset, setReset }) => {
   const [initial, setInitial] = useState(1000);
   const [portfolio, setPortfolio] = useState<{ ticker: string; weight: number }[]>([
     { ticker: 'AAPL', weight: 0.3 },
@@ -23,7 +25,6 @@ const Panel: React.FC<PanelProps> = ({ selectedStocks }) => {
     { ticker: 'TSLA', weight: 0.3 }
   ]);
   const [prediction, setPrediction] = useState(1.2);
-  const [reset, setReset] = useState(true);
   const [loading, setLoading] = useState(false);
 
   const handleSimulate = async () => {
@@ -44,8 +45,8 @@ const Panel: React.FC<PanelProps> = ({ selectedStocks }) => {
       <Prediction initial={initial} prediction={prediction} />
       <div
         className={cn(
-          'absolute z-10 flex h-full w-full items-center justify-center rounded-lg bg-black bg-opacity-30 backdrop-blur-md',
-          !reset && 'hidden'
+          'duration visible absolute z-10 flex h-full w-full items-center justify-center rounded-lg bg-black bg-opacity-30 opacity-100 backdrop-blur-md transition',
+          !reset && 'invisible opacity-0'
         )}
       >
         <button

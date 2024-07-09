@@ -1,9 +1,11 @@
 'use client';
 
+import { DocumentIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import { Stock } from '@/lib/models';
+import { cn } from '@/lib/utils';
 
 import CTABanner from '@/feature/cta';
 import Explanation from '@/feature/explanation';
@@ -15,6 +17,7 @@ export default function HomePage() {
   const [stocks, setStocks] = useState<Stock[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedStocks, setSelectedStocks] = useState<Stock[]>([]);
+  const [reset, setReset] = useState(true);
 
   const fetchStocks = async () => {
     const response = await axios.get('http://127.0.0.1:5000/fetchAllTickers', {
@@ -33,6 +36,12 @@ export default function HomePage() {
       setLoading(false);
     });
   }, []);
+
+  useEffect(() => {
+    if (reset) {
+      setSelectedStocks([]);
+    }
+  }, [reset]);
 
   return (
     <main>
@@ -55,8 +64,28 @@ export default function HomePage() {
           setSelectedStocks={setSelectedStocks}
         />
       </section>
-      <section className="flex w-full -translate-y-32 justify-center md:-translate-y-1/4 xl:-translate-y-1/2">
-        <Panel selectedStocks={selectedStocks} />
+      <section className="mx-auto flex w-[960px] -translate-y-32 flex-col justify-center gap-4 md:-translate-y-1/4 xl:-translate-y-1/2">
+        <Panel selectedStocks={selectedStocks} reset={reset} setReset={setReset} />
+        <div className="flex justify-end gap-2">
+          <button
+            onClick={() => setReset(true)}
+            type="button"
+            className="focus:ring-gray-500 inline-flex items-center rounded-lg border border-lightgrey bg-obsidian px-8 py-3 text-center text-sm font-medium text-white hover:bg-obsidian/80 focus:outline-none focus:ring-4"
+          >
+            Nouvelle simulation
+          </button>
+          <a
+            href="http://127.0.0.1:5000/download"
+            type="button"
+            className={cn(
+              'focus:ring-gray-500 inline-flex items-center rounded-lg border border-lightgrey bg-obsidian px-8 py-3 text-center text-sm font-medium text-white hover:bg-obsidian/80 focus:outline-none focus:ring-4',
+              reset && 'pointer-events-none opacity-90'
+            )}
+          >
+            <DocumentIcon className="mr-2 h-5 w-5" />
+            Télécharger le rapport
+          </a>
+        </div>
       </section>
       <section className="mb-36 px-12">
         <Explanation />
