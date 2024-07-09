@@ -20,7 +20,7 @@ export default function HomePage() {
   const [reset, setReset] = useState(true);
 
   const fetchStocks = async () => {
-    const response = await axios.get('http://127.0.0.1:5000/fetchAllTickers', {
+    const response = await axios.get(process.env.NEXT_PUBLIC_SERVER_URL + '/fetchAllTickers', {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
@@ -75,7 +75,7 @@ export default function HomePage() {
             Nouvelle simulation
           </button>
           <a
-            href="http://127.0.0.1:5000/download"
+            href={process.env.NEXT_PUBLIC_SERVER_URL + '/download'}
             type="button"
             className={cn(
               'focus:ring-gray-500 inline-flex items-center rounded-lg border border-lightgrey bg-obsidian px-8 py-3 text-center text-sm font-medium text-white hover:bg-obsidian/80 focus:outline-none focus:ring-4',

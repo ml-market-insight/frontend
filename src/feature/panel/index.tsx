@@ -30,7 +30,7 @@ const Panel: React.FC<PanelProps> = ({ selectedStocks, reset, setReset }) => {
   const handleSimulate = async () => {
     setLoading(true);
     const selectedTickers = selectedStocks.map((stock) => stock.ticker);
-    const response = await axios.post('http://127.0.0.1:5000/UserSimulation', {
+    const response = await axios.post(process.env.NEXT_PUBLIC_SERVER_URL + '/UserSimulation', {
       tickers: selectedTickers
     });
     setPortfolio(response.data.portfolio);
