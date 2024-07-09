@@ -9,11 +9,11 @@ interface StepProps {
 const Step: React.FC<StepProps> = ({ image, title, children }) => {
   return (
     <div className="flex flex-col items-center gap-8">
-      <span className="rounded-full bg-dark/20">
+      <span className="rounded-full bg-dark">
         <Image src={image} alt={title} width={320} />
       </span>
       <div className="flex flex-col items-center justify-center px-8 text-center">
-        <h4 className="text-accentdark">{title}</h4>
+        <h3 className="text-obsidian">{title}</h3>
         {children}
       </div>
     </div>
