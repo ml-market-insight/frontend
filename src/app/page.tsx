@@ -25,7 +25,7 @@ export default function HomePage() {
         {/* <Image src={hero} alt="Hero" className='absolute top-0 left-0 -z-10'/> */}
         <SearchBar />
       </section>
-      <section className="flex w-full -translate-y-1/3 justify-center md:-translate-y-1/2">
+      <section className="flex w-full -translate-y-32 justify-center md:-translate-y-1/4 xl:-translate-y-1/2">
         <Panel />
       </section>
       <section className="mb-36 px-12">
