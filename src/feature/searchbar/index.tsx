@@ -1,79 +1,24 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 import { Stock } from '@/lib/models';
 
 import Capsule from './components/capsule';
 import Dropdown from './components/dropdown';
 
-const STOCKS: Stock[] = [
-  {
-    name: 'Apple Inc.',
-    ticker: 'AAPL',
-    icon: 'https://s3-symbol-logo.tradingview.com/apple.svg',
-    trust: 90
-  },
-  {
-    name: 'Tesla Inc.',
-    ticker: 'TSLA',
-    icon: 'https://s3-symbol-logo.tradingview.com/tesla.svg',
-    trust: 80
-  },
-  {
-    name: 'Microsoft Corporation',
-    ticker: 'MSFT',
-    icon: 'https://s3-symbol-logo.tradingview.com/microsoft.svg',
-    trust: 70
-  },
-  {
-    name: 'Amazon.com Inc.',
-    ticker: 'AMZN',
-    icon: 'https://s3-symbol-logo.tradingview.com/amazon.svg',
-    trust: 60
-  },
-  {
-    name: 'Alphabet Inc.',
-    ticker: 'GOOGL',
-    icon: 'https://s3-symbol-logo.tradingview.com/alphabet.svg',
-    trust: 50
-  },
-  {
-    name: 'Facebook Inc.',
-    ticker: 'FB',
-    icon: 'https://s3-symbol-logo.tradingview.com/facebook.svg',
-    trust: 40
-  },
-  {
-    name: 'NVIDIA Corporation',
-    ticker: 'NVDA',
-    icon: 'https://s3-symbol-logo.tradingview.com/nvidia.svg',
-    trust: 30
-  },
-  {
-    name: 'PayPal Holdings Inc.',
-    ticker: 'PYPL',
-    icon: 'https://s3-symbol-logo.tradingview.com/paypal.svg',
-    trust: 20
-  },
-  {
-    name: 'Netflix Inc.',
-    ticker: 'NFLX',
-    icon: 'https://s3-symbol-logo.tradingview.com/netflix.svg',
-    trust: 10
-  },
-  {
-    name: 'Adobe Inc.',
-    ticker: 'ADBE',
-    icon: 'https://s3-symbol-logo.tradingview.com/adobe.svg',
-    trust: 5
-  }
-];
-
 const SearchBar = () => {
   const [search, setSearch] = useState('');
+  const [stocks, setStocks] = useState<Stock[]>([]);
+  const [loading, setLoading] = useState(false);
   const [selectedStocks, setSelectedStocks] = useState<Stock[]>([]);
+
+  const fetchStocks = async () => {
+    const response = await axios.get('http://127.0.0.1:5000/fetchAllTickers');
+    return response.data;
+  };
 
   const handleSelect = (stock: Stock) => {
     if (!selectedStocks.some((s) => s.ticker === stock.ticker)) {
@@ -87,13 +32,16 @@ const SearchBar = () => {
   };
 
   function autocompleteStocks(input: string): Stock[] {
+    if (loading) {
+      return [];
+    }
     if (!input) {
-      return STOCKS.sort((a, b) => b.trust - a.trust).slice(0, 5);
+      return stocks.sort((a, b) => b.trust - a.trust).slice(0, 5);
     }
 
     input = input.toLowerCase();
 
-    const filteredStocks = STOCKS.filter(
+    const filteredStocks = stocks.filter(
       (stock) =>
         stock.name.toLowerCase().includes(input) || stock.ticker.toLowerCase().includes(input)
     );
@@ -117,6 +65,14 @@ const SearchBar = () => {
   }
 
   const displayedStocks = autocompleteStocks(search);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchStocks().then((data) => {
+      setStocks(data);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <div className="m-auto my-16 flex max-w-[832px] flex-col gap-3">

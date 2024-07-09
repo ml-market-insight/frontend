@@ -21,13 +21,19 @@ const Dropdown: React.FC<DropdownProps> = ({ items, onClick }) => {
           className="flex w-full flex-row items-center rounded-lg px-4 py-2 hover:bg-zinc-100"
         >
           <span>
-            <Image
-              src={item.icon}
-              alt={item.name}
-              width="24"
-              height="24"
-              className="rounded-full"
-            />
+            {item.icon ? (
+              <Image
+                src={item.icon}
+                alt={item.name}
+                width="24"
+                height="24"
+                className="rounded-full"
+              />
+            ) : (
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-obsidian text-white">
+                {item.name.charAt(0).toUpperCase()}
+              </div>
+            )}
           </span>
           <span className="flex flex-col items-start pl-3 text-left md:flex-row md:items-center md:divide-x md:divide-black/20">
             <h4 className="text-black/80 md:w-24">{item.ticker}</h4>

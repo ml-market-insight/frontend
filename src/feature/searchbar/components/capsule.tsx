@@ -15,7 +15,19 @@ const Capsule: React.FC<CapsuleProps> = ({ item, onRemove }) => {
       onClick={() => onRemove(item)}
     >
       <span>
-        <Image src={item.icon} alt={item.name} width="20" height="20" className="rounded-full" />
+        {item.icon ? (
+          <Image
+            src={item.icon || ''}
+            alt={item.name}
+            width="20"
+            height="20"
+            className="rounded-full"
+          />
+        ) : (
+          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white">
+            {item.name.charAt(0).toUpperCase()}
+          </div>
+        )}
       </span>
       <h5 className="text-sm font-medium text-white">{item.ticker}</h5>
       <XMarkIcon className="size-5 p-1 text-white" />
