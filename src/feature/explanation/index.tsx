@@ -62,36 +62,38 @@ const Explanation = () => {
           Comment ça marche ?
         </h2>
         <p className="text-gray-500 py-4 text-lg">
-          Notre simulateur de portefeuille utilise des modèles mathématiques sophistiqués pour
-          estimer la performance future de votre portefeuille en fonction de différents scénarios de
-          marché. Vous pouvez saisir vos actifs, vos objectifs financiers et votre horizon
-          d'investissement pour obtenir des projections personnalisées de la performance de votre
-          portefeuille. Notre simulateur vous permet également de tester différentes stratégies
-          d'investissement et de comparer les résultats pour trouver la meilleure allocation
-          d'actifs pour votre profil d'investisseur.
+          Notre simulateur de portefeuille utilise des modèles mathématiques sophistiqués et de
+          l'apprentissage machine pour estimer la performance future de votre portefeuille. Vous
+          pouvez saisir vos actifs, qu'ils soient des actions NASDAQ ou des paires de devises
+          (Forex) pour obtenir des projections sur la performance de votre portefeuille et de ses
+          différents actifs. Ainsi, notre programme vous offre la possibilité d'essayer diverses
+          configurations de portefeuilles et de comparer les résultats afin de déterminer la
+          meilleure répartition d'actifs adaptée à votre profil d'investisseurs.
         </p>
         <h2 className="mt-16 text-accent/70" id="who">
           Pour qui ?
         </h2>
         <p className="text-gray-500 py-4 text-lg">
-          Notre simulateur de portefeuille est conçu pour les investisseurs de tous niveaux, des
-          débutants aux professionnels. Que vous soyez un investisseur débutant cherchant à
-          apprendre les bases de l'investissement ou un professionnel expérimenté cherchant à
-          affiner votre stratégie d'investissement, notre simulateur peut vous aider à atteindre vos
-          objectifs financiers. Notre simulateur est également utile pour les conseillers financiers
-          qui cherchent à aider leurs clients à prendre des décisions d'investissement éclairées.
+          Notre outil d'allocation de portefeuille est conçu pour les investisseurs de tous niveaux,
+          des débutants aux professionnels. Que vous soyez un investisseur novice à la recherche de
+          connaissances initiales sur l'investissement ou un professionnel expérimenté qui souhaite
+          affiner sa stratégie d'investissement, notre technologie vous aide à atteindre vos
+          objectifs financiers. Les conseillers financiers qui souhaitent assister leurs clients
+          dans la prise de décisions d'investissement éclairées peuvent également bénéficier de
+          notre solution.
         </p>
         <h2 className="mt-16 text-accent/70" id="why">
           Pourquoi nous faire confiance ?
         </h2>
         <p className="text-gray-500 py-4 text-lg">
           Notre simulateur de portefeuille est basé sur des données historiques précises et des
-          modèles mathématiques sophistiqués. Nous mettons constamment à jour nos algorithmes pour
-          garantir des projections de performance précises et fiables. Notre équipe d'experts en
-          investissement est disponible pour répondre à vos questions et vous aider à interpréter
-          les résultats de notre simulateur. Nous sommes déterminés à vous aider à atteindre vos
-          objectifs financiers en vous fournissant les outils et les informations dont vous avez
-          besoin pour prendre des décisions d'investissement éclairées.
+          modèles mathématiques sophistiqués. Nous mettons jours après jours nos modèles
+          d'apprentissage machine pour garantir des projections de performance précises et fiables.
+          Notre équipe d'experts en investissement est disponible pour répondre à vos questions et
+          vous assister dans l'interprétation plus profonde des résultats de notre simulateur. Notre
+          objectif est de vous accompagner dans l'accomplissement de vos objectifs financiers en
+          vous offrant les outils et les renseignements nécessaires pour prendre des décisions
+          d'investissement éclairées.
         </p>
       </div>
     </div>
