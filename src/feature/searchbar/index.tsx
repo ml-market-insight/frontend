@@ -39,7 +39,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
       return [];
     }
     if (!input) {
-      return stocks.sort((a, b) => b.trust - a.trust).slice(0, 5);
+      return stocks
+        .filter((stock) => stock.icon)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 5)
+        .sort((a, b) => b.trust - a.trust);
     }
 
     input = input.toLowerCase();
