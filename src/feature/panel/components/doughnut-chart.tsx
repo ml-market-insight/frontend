@@ -1,11 +1,15 @@
 import Chart from 'chart.js/auto';
 import { useEffect, useRef } from 'react';
 
-type DoughnutChartProps = React.HTMLAttributes<HTMLDivElement>;
+interface DoughnutChartProps extends React.HTMLAttributes<HTMLDivElement> {
+  portfolio: { ticker: string; weight: number }[];
+}
 
-const DoughnutChart: React.FC<DoughnutChartProps> = ({ ...props }) => {
+const DoughnutChart: React.FC<DoughnutChartProps> = ({ portfolio, ...props }) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstanceRef = useRef<Chart<'doughnut', number[], string> | null>(null);
+  const labels = portfolio.map((stock) => stock.ticker);
+  const data = portfolio.map((stock) => stock.weight * 100);
 
   useEffect(() => {
     const canvas = chartRef.current;
@@ -21,11 +25,11 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({ ...props }) => {
     chartInstanceRef.current = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['AAPL', 'AMZN', 'TSLA', 'MSFT', 'GOOGL'],
+        labels: labels,
         datasets: [
           {
             label: 'Allocation',
-            data: [30, 20, 10, 10, 30],
+            data: data,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -69,7 +73,16 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({ ...props }) => {
         chartInstanceRef.current.destroy();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!chartInstanceRef.current) return;
+
+    chartInstanceRef.current.data.labels = labels;
+    chartInstanceRef.current.data.datasets[0].data = data;
+    chartInstanceRef.current.update();
+  }, [portfolio, labels, data]);
 
   return (
     <div {...props}>

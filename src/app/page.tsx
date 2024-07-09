@@ -1,4 +1,9 @@
-//import Image from 'next/image';
+'use client';
+
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+import { Stock } from '@/lib/models';
 
 import CTABanner from '@/feature/cta';
 import Explanation from '@/feature/explanation';
@@ -6,9 +11,29 @@ import Footer from '@/feature/footer';
 import Panel from '@/feature/panel';
 import SearchBar from '@/feature/searchbar';
 
-//import hero from '/public/images/hero.jpg';
-
 export default function HomePage() {
+  const [stocks, setStocks] = useState<Stock[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedStocks, setSelectedStocks] = useState<Stock[]>([]);
+
+  const fetchStocks = async () => {
+    const response = await axios.get('http://127.0.0.1:5000/fetchAllTickers', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    });
+    return response.data;
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchStocks().then((data) => {
+      setStocks(data);
+      setLoading(false);
+    });
+  }, []);
+
   return (
     <main>
       <section className="min-h-screen bg-dark p-12 md:p-24">
@@ -23,10 +48,15 @@ export default function HomePage() {
           </p>
         </div>
         {/* <Image src={hero} alt="Hero" className='absolute top-0 left-0 -z-10'/> */}
-        <SearchBar />
+        <SearchBar
+          stocks={stocks}
+          loading={loading}
+          selectedStocks={selectedStocks}
+          setSelectedStocks={setSelectedStocks}
+        />
       </section>
       <section className="flex w-full -translate-y-32 justify-center md:-translate-y-1/4 xl:-translate-y-1/2">
-        <Panel />
+        <Panel selectedStocks={selectedStocks} />
       </section>
       <section className="mb-36 px-12">
         <Explanation />

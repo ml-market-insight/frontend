@@ -1,9 +1,12 @@
 import Chart from 'chart.js/auto';
 import { useEffect, useRef } from 'react';
 
-type DoughnutChartProps = React.HTMLAttributes<HTMLDivElement>;
+interface DoughnutChartProps extends React.HTMLAttributes<HTMLDivElement> {
+  initial: number;
+  prediction: number;
+}
 
-const LineChart: React.FC<DoughnutChartProps> = ({ ...props }) => {
+const LineChart: React.FC<DoughnutChartProps> = ({ initial, prediction, ...props }) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstanceRef = useRef<Chart | null>(null);
 
@@ -21,27 +24,19 @@ const LineChart: React.FC<DoughnutChartProps> = ({ ...props }) => {
     chartInstanceRef.current = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ["Aujourd'hui", '1 an'],
+        labels: ["Aujourd'hui", '10 jours'],
         datasets: [
           {
             label: 'Mise de départ',
-            data: [1000, 1000],
+            data: [initial, initial],
             borderColor: 'rgba(255, 99, 132, 0.8)',
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderWidth: 2,
             fill: true
           },
           {
-            label: 'Livret A',
-            data: [1000, 1020],
-            borderColor: 'rgba(54, 162, 235, 0.8)',
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderWidth: 2,
-            fill: true
-          },
-          {
             label: 'Investissement',
-            data: [1000, 1139],
+            data: [initial, initial * prediction],
             borderColor: 'rgba(255, 159, 64, 0.2)',
             backgroundColor: 'rgba(255, 159, 64, 0.2)',
             borderWidth: 2,
@@ -89,7 +84,16 @@ const LineChart: React.FC<DoughnutChartProps> = ({ ...props }) => {
         chartInstanceRef.current.destroy();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!chartInstanceRef.current) return;
+
+    chartInstanceRef.current.data.datasets[0].data = [initial, initial];
+    chartInstanceRef.current.data.datasets[1].data = [initial, initial * prediction];
+    chartInstanceRef.current.update();
+  }, [initial, prediction]);
 
   return (
     <div {...props}>

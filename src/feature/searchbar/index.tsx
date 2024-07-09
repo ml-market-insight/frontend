@@ -1,24 +1,27 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Stock } from '@/lib/models';
 
 import Capsule from './components/capsule';
 import Dropdown from './components/dropdown';
 
-const SearchBar = () => {
-  const [search, setSearch] = useState('');
-  const [stocks, setStocks] = useState<Stock[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [selectedStocks, setSelectedStocks] = useState<Stock[]>([]);
+interface SearchBarProps {
+  stocks: Stock[];
+  selectedStocks: Stock[];
+  loading: boolean;
+  setSelectedStocks: (stocks: Stock[]) => void;
+}
 
-  const fetchStocks = async () => {
-    const response = await axios.get('http://127.0.0.1:5000/fetchAllTickers');
-    return response.data;
-  };
+const SearchBar: React.FC<SearchBarProps> = ({
+  stocks,
+  selectedStocks,
+  loading,
+  setSelectedStocks
+}) => {
+  const [search, setSearch] = useState('');
 
   const handleSelect = (stock: Stock) => {
     if (!selectedStocks.some((s) => s.ticker === stock.ticker)) {
@@ -65,14 +68,6 @@ const SearchBar = () => {
   }
 
   const displayedStocks = autocompleteStocks(search);
-
-  useEffect(() => {
-    setLoading(true);
-    fetchStocks().then((data) => {
-      setStocks(data);
-      setLoading(false);
-    });
-  }, []);
 
   return (
     <div className="m-auto my-16 flex max-w-[832px] flex-col gap-3">
