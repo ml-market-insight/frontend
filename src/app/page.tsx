@@ -64,7 +64,7 @@ export default function HomePage() {
           setSelectedStocks={setSelectedStocks}
         />
       </section>
-      <section className="mx-auto flex w-[960px] -translate-y-32 flex-col justify-center gap-4 xl:-translate-y-1/2">
+      <section className="mx-auto flex w-[960px] -translate-y-32 flex-col justify-center gap-4">
         <Panel selectedStocks={selectedStocks} reset={reset} setReset={setReset} />
         <div className="flex justify-end gap-2">
           <button
